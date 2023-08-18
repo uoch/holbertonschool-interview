@@ -10,4 +10,11 @@ def canUnlockAll(boxes):
         for key in box:
             if key != index:
                 x.add(key)
-    return len(x) == len(boxes) or ((len(x)-1) == len(boxes))
+    xx = list((sorted(x)))
+    for i in range(len(xx)-1):
+        if xx[i+1] != int(xx[i])+1:
+            return False
+    print(xx)
+    print(len(xx))
+    print(len(boxes))
+    return len(x) >= len(boxes) 
