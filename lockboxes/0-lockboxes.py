@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""Returns True if all boxes are unlocked"""
+
 
 def canUnlockAll(boxes):
     """Returns True if all boxes are unlocked"""
