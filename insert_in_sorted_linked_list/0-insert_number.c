@@ -14,25 +14,24 @@ listint_t *insert_node(listint_t **head, int number)
 
     new = malloc(sizeof(listint_t));
     if (new == NULL)
-        return NULL; // Return NULL if memory allocation fails
-
-    new->n = number; // Assign number to new node
+        return NULL;
+    new->n = number;
     new->next = NULL;
 
-    temp = *head;                         // Assign head to head of linked list
-    if (temp == NULL || temp->n > number) // If head is NULL or head is greater than number
+    temp = *head;                         
+    if (temp == NULL || temp->n > number)
     {
         new->next = temp;
         *head = new;
         return new;
     }
 
-    while (temp->next != NULL && temp->next->n <= number) // Loop through linked list
+    while (temp->next != NULL && temp->next->n <= number)
     {
         temp = temp->next;
     }
 
-    new->next = temp->next; // Assign new node to next node
+    new->next = temp->next;
     temp->next = new;
     return new;
 }
