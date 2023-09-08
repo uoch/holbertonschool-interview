@@ -5,8 +5,7 @@
 def minOperations(n):
     """minimum operations
     you should track text with paste
-    not add 1 every time which means H
-    """
+    not add 1 every time which means H"""
     text = 1
     paste = 0
     result = n
@@ -18,8 +17,9 @@ def minOperations(n):
             paste = text
             text += paste
             count += 2
-        text += paste
-        count += 1
+        else:
+            text += paste
+            count += 1
         if text == result:
             break
     return count
