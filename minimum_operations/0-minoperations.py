@@ -3,16 +3,23 @@
 
 
 def minOperations(n):
-    """minimum operations"""
-    text = "H"
-    h = "H"
+    """minimum operations
+    you should track text with paste
+    not add 1 every time which means H
+    """
+    text = 1
+    paste = 0
+    result = n
     if n <= 1:
         return 0
-    i = 1
-    while len(text) < (n):
-        if len(text) % 2 == 0:
-            text += text
-            i += 1
-        text += h
-        i += 1
-    return i
+    count = 0
+    while text < n:
+        if n % text == 0:
+            paste = text
+            text += paste
+            count += 2
+        text += paste
+        count += 1
+        if text == result:
+            break
+    return count
