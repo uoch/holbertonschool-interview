@@ -15,5 +15,4 @@ def minOperations(n):
             i += 1
         text += h
         i += 1
-    print(f"{text} with len =  {len(text)}\n")
     return i
