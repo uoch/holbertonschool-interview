@@ -35,11 +35,11 @@ bool toppel_check(int grid[3][3])
 		{
 			if (grid[i][j] > 3)
 			{
-				return true;
+				return (true);
 			}
 		}
 	}
-	return false;
+	return (false);
 }
 /**
  * do_toppel - topple the cell to her neighbors
@@ -50,6 +50,7 @@ bool toppel_check(int grid[3][3])
 void do_toppel(int grid[3][3])
 {
 	int i, j;
+
 	if (toppel_check(grid) == false)
 	{
 		return;
@@ -69,13 +70,13 @@ void do_toppel(int grid[3][3])
 					{
 						grid[i][j] -= 4;
 						if (i - 1 >= 0)
-							grid[i - 1][j] += 1;
+						grid[i - 1][j] += 1;
 						if (i + 1 < 3)
-							grid[i + 1][j] += 1;
+						grid[i + 1][j] += 1;
 						if (j - 1 >= 0)
-							grid[i][j - 1] += 1;
+						grid[i][j - 1] += 1;
 						if (j + 1 < 3)
-							grid[i][j + 1] += 1;
+						grid[i][j + 1] += 1;
 					}
 				}
 			}
