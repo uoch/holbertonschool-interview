@@ -72,6 +72,13 @@ void do_toppel(int grid[3][3])
                             grid[i][j - 1] += 1;
                         if (j + 1 < 3)
                             grid[i][j + 1] += 1;
+                        if (i == 2 && j == 2){
+                            grid[i - 1][j] += 1;
+                            grid[i+1][j] += 1;
+                            grid[i][j-1] += 1;
+                            grid[i][j+1] += 1;
+                        }
+                            
                     }
                 }
             }
