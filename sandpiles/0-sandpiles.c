@@ -54,7 +54,6 @@ void do_toppel(int grid[3][3])
     {
         printf("=\n");
         print(grid);
-        printf("\n");
         while (toppel_check(grid) == true)
         {
             for (i = 0; i < 3; i++)
@@ -76,6 +75,8 @@ void do_toppel(int grid[3][3])
                     }
                 }
             }
+            if (toppel_check(grid) == false)
+                break;
             printf("=\n");
             print(grid);
             printf("\n");
