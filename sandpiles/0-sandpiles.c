@@ -1,10 +1,8 @@
 #include "sandpiles.h"
 /**
- * toppel_check - sum of two sandpiles
- * @grid1: first sandpile
- * @grid2: second sandpile
+ * print - Print 3x3 grid
+ * @grid: 3x3 grid
  *
- * Return: true if cell is greater than 3
  */
 void print(int grid[3][3])
 {
@@ -21,6 +19,12 @@ void print(int grid[3][3])
         printf("\n");
     }
 }
+/**
+ * toppel_check - sum of two sandpiles
+ * @grid: grid to check
+ *
+ * Return: true if cell is greater than 3
+ */
 bool toppel_check(int grid[3][3])
 {
     int i, j;
@@ -72,13 +76,6 @@ void do_toppel(int grid[3][3])
                             grid[i][j - 1] += 1;
                         if (j + 1 < 3)
                             grid[i][j + 1] += 1;
-                        if (i == 2 && j == 2){
-                            grid[i - 1][j] += 1;
-                            grid[i+1][j] += 1;
-                            grid[i][j-1] += 1;
-                            grid[i][j+1] += 1;
-                        }
-                            
                     }
                 }
             }
