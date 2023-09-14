@@ -79,7 +79,6 @@ void do_toppel(int grid[3][3])
                 break;
             printf("=\n");
             print(grid);
-            printf("\n");
         }
     }
 }
