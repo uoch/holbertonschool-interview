@@ -1,4 +1,5 @@
 #include "sandpiles.h"
+
 /**
  * print - Print 3x3 grid
  * @grid: 3x3 grid
@@ -19,13 +20,14 @@ void print(int grid[3][3])
 		printf("\n");
 	}
 }
+
 /**
- * toppel_check - sum of two sandpiles
+ * topple_check - sum of two sandpiles
  * @grid: grid to check
  *
  * Return: true if cell is greater than 3
  */
-bool toppel_check(int grid[3][3])
+bool topple_check(int grid[3][3])
 {
 	int i, j;
 
@@ -35,12 +37,13 @@ bool toppel_check(int grid[3][3])
 		{
 			if (grid[i][j] > 3)
 			{
-				return true;
+				return (true);
 			}
 		}
 	}
-	return false;
+	return (false);
 }
+
 /**
  * do_toppel - topple the cell to her neighbors
  * @grid: sum of two sandpiles
@@ -50,7 +53,8 @@ bool toppel_check(int grid[3][3])
 void do_toppel(int grid[3][3])
 {
 	int i, j;
-	if (toppel_check(grid) == false)
+
+	if (topple_check(grid) == false)
 	{
 		return;
 	}
@@ -58,13 +62,12 @@ void do_toppel(int grid[3][3])
 	{
 		printf("=\n");
 		print(grid);
-		while (toppel_check(grid) == true)
+		while (topple_check(grid) == true)
 		{
 			for (i = 0; i < 3; i++)
 			{
 				for (j = 0; j < 3; j++)
 				{
-
 					if (grid[i][j] > 3)
 					{
 						grid[i][j] -= 4;
@@ -76,10 +79,17 @@ void do_toppel(int grid[3][3])
 							grid[i][j - 1] += 1;
 						if (j + 1 < 3)
 							grid[i][j + 1] += 1;
+						if (i == 2 && j == 2)
+						{
+							grid[i - 1][j] += 1;
+							grid[i + 1][j] += 1;
+							grid[i][j - 1] += 1;
+							grid[i][j + 1] += 1;
+						}
 					}
 				}
 			}
-			if (toppel_check(grid) == false)
+			if (topple_check(grid) == false)
 				break;
 			printf("=\n");
 			print(grid);
