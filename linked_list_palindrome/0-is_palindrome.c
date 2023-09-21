@@ -124,9 +124,6 @@ int is_palindrome(listint_t **head)
                 return (0);
             }
         }
-
-        free(first_half);
-        free(second_half);
         return (1);
     }
 }
