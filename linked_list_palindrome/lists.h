@@ -23,6 +23,8 @@ int is_palindrome(listint_t **head);
 size_t len_linked_list(const listint_t *h);
 void free_array(int *array, int *array2, size_t size);
 int *fullfill_array(listint_t *temp, size_t re);
+listint_t *reverse_listint(listint_t **head);
+
 
 
 #endif /* LISTS_H */
