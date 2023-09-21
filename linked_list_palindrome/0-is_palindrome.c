@@ -101,13 +101,13 @@ listint_t *half_linked_list(listint_t *head)
 int is_palindrome(listint_t **head)
 {
     listint_t *temp = *head;
-    listint_t *tail;
+    listint_t *tail, *half;
     size_t pa, re, k, m;
     int *first_half, *second_half;
 
     pa = len_linked_list(temp);
     tail = reverse_listint(&temp);
-    listint_t *half = half_linked_list(tail);
+    half = half_linked_list(tail);
 
     if (pa <= 1)
     {
