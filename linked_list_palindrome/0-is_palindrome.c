@@ -79,12 +79,16 @@ int *fullfill_array(listint_t *temp, size_t re)
  */
 listint_t *reverse_listint(listint_t **head)
 {
+    listint_t *prev;
+    listint_t *current;
+    listint_t *next;
+
     if (head == NULL || *head == NULL)
         return NULL;
 
-    listint_t *prev = NULL;
-    listint_t *current = *head;
-    listint_t *next = NULL;
+    prev = NULL;
+    current = *head;
+    next = NULL;
 
     while (current != NULL)
     {
@@ -113,7 +117,7 @@ int is_palindrome(listint_t **head)
     int *first_half, *second_half;
 
     pa = len_linked_list(temp);
-tail = reverse_listint(&temp);
+    tail = reverse_listint(&temp);
     if (pa <= 1)
     {
         return (1);
