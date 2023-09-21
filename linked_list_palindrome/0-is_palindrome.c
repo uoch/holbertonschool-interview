@@ -126,7 +126,6 @@ int is_palindrome(listint_t **head)
             }
         }
 
-        // Free only the second_half, first_half was already freed
         free(second_half);
         return (1);
     }
