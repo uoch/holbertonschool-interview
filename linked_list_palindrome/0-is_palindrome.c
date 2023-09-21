@@ -129,8 +129,7 @@ int is_palindrome(listint_t **head)
                 return (0);
             }
         }
-        free(first_half);
-        free(second_half);
+        // No need to free first_half and second_half here.
         return (1);
     }
 }
