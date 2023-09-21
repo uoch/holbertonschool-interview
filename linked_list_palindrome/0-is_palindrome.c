@@ -80,7 +80,7 @@ int *fullfill_array(listint_t *temp, size_t re)
 int is_palindrome(listint_t **head)
 {
     listint_t *temp = *head;
-    size_t pa, re, k;
+    size_t pa, re, k,j;
     int *first_half, *second_half;
 
     pa = len_linked_list(temp);
@@ -109,7 +109,7 @@ int is_palindrome(listint_t **head)
             return (0);
         }
 
-        for (size_t j = 0; j < re; j++)
+        for ( j = 0; j < re; j++)
         {
             second_half[j] = temp->n;
             temp = temp->next;
