@@ -55,7 +55,7 @@ int *fullfill_array(listint_t *temp, size_t re)
     int *array;
     size_t i;
 
-    array = (int *)malloc(re * sizeof(int));
+    array = (int *)malloc((re + 1) * sizeof(int));
 
     if (array == NULL)
     {
@@ -72,20 +72,43 @@ int *fullfill_array(listint_t *temp, size_t re)
 }
 
 /**
+ * reverse_listint - reverses a listint_t linked list
+ * @head: pointer to a pointer to the head of the list
+ *
+ * Return: a pointer to the first node of the reversed list
+ */
+listint_t *reverse_listint(listint_t **head)
+{
+    listint_t *curr = *head;
+    listint_t *tail = NULL;
+
+    while (curr != NULL)
+    {
+        tail = curr->next;
+        curr->next = tail->next;
+        tail->next = *head;
+        *head = tail;
+        curr = curr->next;
+    }
+
+    return (*head);
+}
+
+/**
  * is_palindrome - Check if a singly linked list is a palindrome.
  * @head: Pointer to a pointer to the head of the linked list.
  *
  * Return: 1 if the linked list is a palindrome, 0 otherwise.
  */
-
 int is_palindrome(listint_t **head)
 {
     listint_t *temp = *head;
-    size_t pa, re, k, j;
+    listint_t *tail;
+    size_t pa, re, k;
     int *first_half, *second_half;
 
     pa = len_linked_list(temp);
-
+    tail = reverse_listint(head);
     if (pa <= 1)
     {
         return (1);
@@ -95,27 +118,7 @@ int is_palindrome(listint_t **head)
         re = (pa % 2 == 0) ? pa / 2 : (pa - 1) / 2;
 
         first_half = fullfill_array(temp, re);
-
-        if (pa % 2 != 0)
-        {
-            temp = temp->next;
-        }
-
-        temp = *head;
-
-        second_half = (int *)malloc(re * sizeof(int));
-        if (second_half == NULL)
-        {
-            free(first_half);
-            return (0);
-        }
-
-        for (j = 0; j < re; j++)
-        {
-            second_half[j] = temp->n;
-            temp = temp->next;
-        }
-
+        second_half = fullfill_array(tail, re);
         for (k = 0; k < re; k++)
         {
             if (first_half[k] != second_half[k])
@@ -125,7 +128,7 @@ int is_palindrome(listint_t **head)
                 return (0);
             }
         }
-
+        free(first_half);
         free(second_half);
         return (1);
     }
