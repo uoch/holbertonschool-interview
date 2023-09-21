@@ -77,10 +77,11 @@ int *fullfill_array(listint_t *temp, size_t re)
  *
  * Return: 1 if the linked list is a palindrome, 0 otherwise.
  */
+
 int is_palindrome(listint_t **head)
 {
     listint_t *temp = *head;
-    size_t pa, re, k,j;
+    size_t pa, re, k, j;
     int *first_half, *second_half;
 
     pa = len_linked_list(temp);
@@ -109,7 +110,7 @@ int is_palindrome(listint_t **head)
             return (0);
         }
 
-        for ( j = 0; j < re; j++)
+        for (j = 0; j < re; j++)
         {
             second_half[j] = temp->n;
             temp = temp->next;
@@ -124,6 +125,9 @@ int is_palindrome(listint_t **head)
                 return (0);
             }
         }
+
+        // Free only the second_half, first_half was already freed
+        free(second_half);
         return (1);
     }
 }
