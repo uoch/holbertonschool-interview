@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lists.h"
-
 /**
  * len_linked_list - Calculate the length of a linked list.
  * @h: Pointer to the head of the linked list.
@@ -22,27 +21,6 @@ size_t len_linked_list(const listint_t *h)
 
     return (n);
 }
-
-/**
- * free_array - Free memory for arrays.
- * @array: Pointer to the first array.
- * @array2: Pointer to the second array.
- * @size: Size of the arrays.
- */
-void free_array(int *array, int *array2, size_t size)
-{
-    size_t i;
-
-    for (i = 0; i < size; i++)
-    {
-        array[i] = 0;
-        array2[i] = 0;
-    }
-
-    free(array);
-    free(array2);
-}
-
 /**
  * fullfill_array - Fill an array with values from a linked list.
  * @temp: Pointer to the linked list.
@@ -55,7 +33,7 @@ int *fullfill_array(listint_t *temp, size_t re)
     int *array;
     size_t i;
 
-    array = (int *)malloc((re + 1) * sizeof(int));
+    array = (int *)malloc(re * sizeof(int));
 
     if (array == NULL)
     {
@@ -70,7 +48,6 @@ int *fullfill_array(listint_t *temp, size_t re)
 
     return (array);
 }
-
 /**
  * reverse_listint - reverses a listint_t linked list
  * @head: pointer to a pointer to the head of the list
@@ -79,16 +56,12 @@ int *fullfill_array(listint_t *temp, size_t re)
  */
 listint_t *reverse_listint(listint_t **head)
 {
-    listint_t *prev;
-    listint_t *current;
-    listint_t *next;
+    listint_t *prev = NULL;
+    listint_t *current = *head;
+    listint_t *next = NULL;
 
     if (head == NULL || *head == NULL)
         return NULL;
-
-    prev = NULL;
-    current = *head;
-    next = NULL;
 
     while (current != NULL)
     {
@@ -102,22 +75,40 @@ listint_t *reverse_listint(listint_t **head)
 
     return *head;
 }
-
 /**
- * is_palindrome - Check if a singly linked list is a palindrome.
- * @head: Pointer to a pointer to the head of the linked list.
- *
- * Return: 1 if the linked list is a palindrome, 0 otherwise.
+ * half_linked_list - Calculate the half of a linked list.
+ * @head: Pointer to the head of the linked list.
+ * Return: The half of the linked list.
+ */
+listint_t *half_linked_list(listint_t *head)
+{
+    listint_t *temp = head;
+    size_t pa, re, k;
+
+    pa = len_linked_list(temp);
+    re = (pa % 2 == 0) ? pa / 2 : (pa - 1) / 2;
+    for (k = 0; k < re; k++)
+    {
+        temp = temp->next;
+    }
+    return temp;
+}
+/**
+ * is_palindrome - checks if a singly linked list is a palindrome.
+ * @head: Pointer to the head of the linked list.
+ * Return: 1 if it is a palindrome, 0 if it is not a palindrome.
  */
 int is_palindrome(listint_t **head)
 {
     listint_t *temp = *head;
     listint_t *tail;
-    size_t pa, re, k;
+    size_t pa, re, k, m;
     int *first_half, *second_half;
 
     pa = len_linked_list(temp);
     tail = reverse_listint(&temp);
+    listint_t *half = half_linked_list(tail);
+
     if (pa <= 1)
     {
         return (1);
@@ -127,10 +118,11 @@ int is_palindrome(listint_t **head)
         re = (pa % 2 == 0) ? pa / 2 : (pa - 1) / 2;
 
         first_half = fullfill_array(temp, re);
-        second_half = fullfill_array(tail, re);
+        second_half = fullfill_array(half, re);
         for (k = 0; k < re; k++)
         {
-            if (first_half[k] != second_half[k])
+            m = re;
+            if (first_half[k] != second_half[m - k - 1])
             {
                 free(first_half);
                 free(second_half);
