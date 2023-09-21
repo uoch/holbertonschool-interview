@@ -87,7 +87,7 @@ int is_palindrome(listint_t **head)
 
     if (pa <= 1)
     {
-        return (1); // Empty list or a list with a single element is always a palindrome
+        return (1);
     }
     else
     {
@@ -102,15 +102,14 @@ int is_palindrome(listint_t **head)
 
         temp = *head;
 
-        // Declare and initialize second_half
         second_half = (int *)malloc(re * sizeof(int));
         if (second_half == NULL)
         {
             free(first_half);
-            return (0); // Memory allocation failed
+            return (0);
         }
 
-        for (size_t j = 0; j < re; j++) // Use size_t for j
+        for (size_t j = 0; j < re; j++)
         {
             second_half[j] = temp->n;
             temp = temp->next;
@@ -122,12 +121,12 @@ int is_palindrome(listint_t **head)
             {
                 free(first_half);
                 free(second_half);
-                return (0); // Not a palindrome
+                return (0);
             }
         }
 
         free(first_half);
         free(second_half);
-        return (1); // Palindrome
+        return (1);
     }
 }
