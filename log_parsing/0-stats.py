@@ -20,10 +20,14 @@ def parse(line):
 def parse10(data_list):
     """parse 10 lines of generated logs"""
     file_size = 0
+    count = 0
     for data in data_list:
         file_size += data["file_size"]
         status_count[data["status_code"]] += 1
-    return file_size, status_count
+        count += 1
+    if count == 1 :
+        return file_size, status_count
+    return file_size, status_count , count
 
 
 def print_stats(file_size, status_count):
@@ -36,20 +40,15 @@ def print_stats(file_size, status_count):
 
 if __name__ == "__main__":
     data_list = []
-    x = []
     try:
         for input_line in sys.stdin:
+            if input_line == "":
+                print("file size: 0")
             data_list.append(parse(input_line))
-            x.append(input_line)
             if len(data_list) == 10:
-                file_size, status_count = parse10(data_list)
+                file_size, status_count, count = parse10(data_list)
                 print_stats(file_size, status_count)
                 data_list = []
-            if len(x) == 1:
-                file_size, status_count = parse10(data_list)
-                print_stats(file_size, status_count)
-                x = []
-                break
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
         exit(0)
