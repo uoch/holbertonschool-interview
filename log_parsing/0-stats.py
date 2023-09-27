@@ -31,7 +31,7 @@ if __name__ == "__main__":
     try:
         for input_line in sys.stdin:
             data_list.append(parse(input_line))
-            if len(data_list) == 10:
+            if len(data_list) <= 10:
                 file_size, status_count = parse10(data_list)
                 print("File size: {}".format(file_size))
                 for k, v in status_count.items():
