@@ -25,9 +25,10 @@ def parse10(data_list):
         file_size += data["file_size"]
         status_count[data["status_code"]] += 1
         count += 1
-    if count == 1 :
+    if count == 1:
         return file_size, status_count
-    return file_size, status_count , count
+    if count == 10:
+        return file_size, status_count
 
 
 def print_stats(file_size, status_count):
@@ -45,10 +46,9 @@ if __name__ == "__main__":
             if input_line == "":
                 print("file size: 0")
             data_list.append(parse(input_line))
-            if len(data_list) == 10:
-                file_size, status_count, count = parse10(data_list)
-                print_stats(file_size, status_count)
-                data_list = []
+            file_size, status_count = parse10(data_list)
+            print_stats(file_size, status_count)
+            data_list = []
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
         exit(0)
