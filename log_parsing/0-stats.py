@@ -26,18 +26,30 @@ def parse10(data_list):
     return file_size, status_count
 
 
+def print_stats(file_size, status_count):
+    """print stats"""
+    print("File size: {}".format(file_size))
+    for k, v in status_count.items():
+        if v != 0:
+            print("{}: {}".format(k, v))
+
+
 if __name__ == "__main__":
     data_list = []
+    x = []
     try:
         for input_line in sys.stdin:
             data_list.append(parse(input_line))
-            if len(data_list) == 10 or len(data_list) == 1:
+            x.append(input_line)
+            if len(data_list) == 10:
                 file_size, status_count = parse10(data_list)
-                print("File size: {}".format(file_size))
-                for k, v in status_count.items():
-                    if v != 0:
-                        print("{}: {}".format(k, v))
+                print_stats(file_size, status_count)
                 data_list = []
+            if len(x) == 1:
+                file_size, status_count = parse10(data_list)
+                print_stats(file_size, status_count)
+                x = []
+                break
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
         exit(0)
