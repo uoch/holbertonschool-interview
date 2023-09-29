@@ -29,7 +29,7 @@ def parse10(data_list):
 def print_stats(file_size, status_count):
     """print stats"""
     print("File size: {}".format(file_size))
-    for k, v in status_count.items():
+    for k, v in sorted(status_count.items()):
         if v != 0:
             print("{}: {}".format(k, v))
 
@@ -46,7 +46,7 @@ if __name__ == "__main__":
                 print_stats(file_size, status_count)
                 data_list = []
         # emptying the buffer
-        x,y = parse10(data_list)
+        x, y = parse10(data_list)
         print_stats(x, y)
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
