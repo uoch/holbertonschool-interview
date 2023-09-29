@@ -13,10 +13,10 @@ def parse(line):
     try:
         status_code = int(data[-2])
         file_size = int(data[-1])
+        if status_code not in status:
+            return None
     except Exception:
         pass
-    if status_code not in status:
-        return None
     return {"status_code": status_code, "file_size": file_size}
 
 
