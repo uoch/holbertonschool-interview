@@ -1,11 +1,10 @@
 #!/usr/bin/python3
 """Log parsing"""
+import datetime
 import sys
-
 
 status = [200, 301, 400, 401, 403, 404, 405, 500]
 status_count = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
-
 
 def parse(line):
     """Parse a line"""
@@ -21,7 +20,6 @@ def parse(line):
     except (ValueError, IndexError):
         return None
 
-
 def parse10(data_list):
     """parse 10 lines of generated logs"""
     file_size = 0
@@ -30,7 +28,6 @@ def parse10(data_list):
         status_count[data["status_code"]] += 1
     return file_size, status_count
 
-
 def print_stats(file_size, status_count):
     """print stats"""
     print(f"File size: {file_size}")
@@ -38,7 +35,6 @@ def print_stats(file_size, status_count):
         count = status_count.get(code, 0)
         if count > 0:
             print(f"{code}: {count}")
-
 
 if __name__ == "__main__":
     data_list = []
