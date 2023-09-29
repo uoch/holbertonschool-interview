@@ -36,6 +36,7 @@ def print_stats(file_size, status_count):
 
 if __name__ == "__main__":
     data_list = []
+    h = 0
     try:
         for input_line in sys.stdin:
             if input_line == "":
@@ -43,11 +44,12 @@ if __name__ == "__main__":
             data_list.append(parse(input_line))
             if len(data_list) == 10:
                 file_size, status_count = parse10(data_list)
+                h = file_size
                 print_stats(file_size, status_count)
                 data_list = []
         # emptying the buffer
         x, y = parse10(data_list)
-        x += file_size
+        x += h
         print_stats(x, y)
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
