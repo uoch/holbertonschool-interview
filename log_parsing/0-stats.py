@@ -37,6 +37,7 @@ def print_stats(file_size, status_count):
 if __name__ == "__main__":
     data_list = []
     h = 0
+    r = 0
     try:
         for input_line in sys.stdin:
             if input_line == "":
@@ -45,8 +46,10 @@ if __name__ == "__main__":
             if len(data_list) == 10:
                 file_size, status_count = parse10(data_list)
                 h = file_size
-                print_stats(file_size, status_count)
+                r += file_size
+                print_stats(r, status_count)
                 data_list = []
+                r += file_size
         # emptying the buffer
         x, y = parse10(data_list)
         x += h
