@@ -25,8 +25,6 @@ def parse10(data_list):
         file_size += data["file_size"]
         status_count[data["status_code"]] += 1
         count += 1
-    if count == 1:
-        return file_size, status_count
     if count == 10:
         return file_size, status_count
 
@@ -43,8 +41,9 @@ if __name__ == "__main__":
     data_list = []
     try:
         for input_line in sys.stdin:
-            if input_line == "":
+            if input_line is None:
                 print("file size: 0")
+            print(type(sys.stdin))
             data_list.append(parse(input_line))
             file_size, status_count = parse10(data_list)
             print_stats(file_size, status_count)
