@@ -23,9 +23,12 @@ def parse(line):
 def parse10(data_list):
     """parse 10 lines of generated logs"""
     file_size = 0
-    for data in data_list:
-        file_size += data["file_size"]
-        status_count[data["status_code"]] += 1
+    try:
+        for data in data_list:
+            file_size += data["file_size"]
+            status_count[data["status_code"]] += 1
+    except Exception:
+        pass
     return file_size, status_count
 
 
