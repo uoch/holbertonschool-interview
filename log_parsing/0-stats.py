@@ -10,8 +10,11 @@ status_count = {200: 0, 301: 0, 400: 0, 401: 0, 403: 0, 404: 0, 405: 0, 500: 0}
 def parse(line):
     """Parse a line"""
     data = line.split(" ")
-    status_code = int(data[-2])
-    file_size = int(data[-1])
+    try:
+        status_code = int(data[-2])
+        file_size = int(data[-1])
+    except Exception:
+        pass
     if status_code not in status:
         return None
     return {"status_code": status_code, "file_size": file_size}
@@ -37,7 +40,6 @@ def print_stats(file_size, status_count):
 if __name__ == "__main__":
     data_list = []
     h = 0
-    r = 0
     try:
         for input_line in sys.stdin:
             if input_line == "":
@@ -46,10 +48,8 @@ if __name__ == "__main__":
             if len(data_list) == 10:
                 file_size, status_count = parse10(data_list)
                 h = file_size
-                r += file_size
-                print_stats(r, status_count)
+                print_stats(file_size, status_count)
                 data_list = []
-                r += file_size
         # emptying the buffer
         x, y = parse10(data_list)
         x += h
