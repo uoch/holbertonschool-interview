@@ -14,7 +14,7 @@ def parse(line):
         status_code = int(data[-2])
         file_size = int(data[-1])
     except Exception:
-        pass
+        return None
     if status_code not in status:
         return None
     return {"status_code": status_code, "file_size": file_size}
