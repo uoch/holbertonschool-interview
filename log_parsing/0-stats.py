@@ -45,6 +45,9 @@ if __name__ == "__main__":
                 file_size, status_count = parse10(data_list)
                 print_stats(file_size, status_count)
                 data_list = []
+        # emptying the buffer
+        x,y = parse10(data_list)
+        print_stats(x, y)
     except KeyboardInterrupt:
         print("KeyboardInterrupt")
         exit(0)
