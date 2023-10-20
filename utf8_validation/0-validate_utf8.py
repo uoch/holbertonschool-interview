@@ -1,30 +1,26 @@
 #!/usr/bin/python3
-"""validUTF8 module"""
+"""utf-8 validation"""
 
 
 def validUTF8(data):
-    """Determines if a given data set represents a valid UTF-8 encoding"""
-    byte_count = 0
+    """determines if a given data set represents a valid UTF-8 encoding"""
+    remaining_bytes = 0
 
     for num in data:
-        binary_num = bin(num)[2:]
-        binary_num = binary_num.zfill(8)
-
-        if byte_count == 0:
-            if binary_num[0] == '0':
-                byte_count = 0
-            elif binary_num[0] == '110':
-                byte_count = 1
-            elif binary_num[0:3] == '1110':
-                byte_count = 2
-            elif binary_num[0:4] == '11110':
-                byte_count = 3
+        if remaining_bytes == 0:
+            if (num & 0b10000000) == 0:
+                remaining_bytes = 0
+            elif (num & 0b11100000) == 0b11000000:
+                remaining_bytes = 1
+            elif (num & 0b11110000) == 0b11100000:
+                remaining_bytes = 2
+            elif (num & 0b11111000) == 0b11110000:
+                remaining_bytes = 3
             else:
                 return False
         else:
-            # Check that the byte starts with '10' as a continuation byte
-            if binary_num[0:2] != '10':
+            if (num & 0b11000000) != 0b10000000:
                 return False
-            byte_count -= 1
+            remaining_bytes -= 1
 
-    return byte_count == 0
+    return remaining_bytes == 0
