@@ -32,7 +32,7 @@ def solve_nqueens(n):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python script_name.py <N>")
+        print(f"Usage: nqueens{sys}")
         sys.exit(1)
 
     try:
@@ -41,9 +41,10 @@ if __name__ == "__main__":
             print("N must be a positive integer.")
             sys.exit(1)
         if n < 4:
+            print("N must be at least 4.")
             sys.exit(1)
         solutions = solve_nqueens(n)
         print(solutions)
     except ValueError:
-        print("Invalid value for N. Please enter a positive integer.")
+        print("N must be a number")
         sys.exit(1)
