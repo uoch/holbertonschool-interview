@@ -43,7 +43,8 @@ if __name__ == "__main__":
             print("N must be at least 4")
             sys.exit(1)
         solutions = solve_nqueens(n)
-        print(solutions)
+        for solution in solutions:
+            print(solution)
     except ValueError:
         print("N must be a number")
         sys.exit(1)
