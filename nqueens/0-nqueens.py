@@ -32,7 +32,7 @@ def solve_nqueens(n):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print(f"Usage: nqueens N")
+        print("Usage: nqueens N")
         sys.exit(1)
 
     try:
