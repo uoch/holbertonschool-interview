@@ -2,6 +2,7 @@ import sys
 
 
 def is_safe(board, row, col):
+    """Check if it is safe to place a queen at board[x][y]"""
     for i in range(row):
         if board[i] == col or abs(board[i] - col) == abs(i - row):
             return False
@@ -9,6 +10,7 @@ def is_safe(board, row, col):
 
 
 def solve_nqueens(n):
+    """Solve the n queens problem and print the number of solutions"""
     result = []
   # Backtrack by resetting the queen position
 
