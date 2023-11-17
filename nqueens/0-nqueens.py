@@ -13,7 +13,6 @@ def is_safe(board, row, col):
 def solve_nqueens(n):
     """Solve the n queens problem and print the number of solutions"""
     result = []
-  # Backtrack by resetting the queen position
 
     def backtrack(board, row, n):
         if row == n:
@@ -41,7 +40,7 @@ if __name__ == "__main__":
             print("N must be a positive integer.")
             sys.exit(1)
         if n < 4:
-            print("N must be at least 4.")
+            print("N must be at least 4")
             sys.exit(1)
         solutions = solve_nqueens(n)
         print(solutions)
