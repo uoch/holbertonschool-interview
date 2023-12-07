@@ -14,13 +14,23 @@ request('https://swapi-api.hbtn.io/api/films/' + id, function (error, response, 
     }
     const parsed = JSON.parse(body);
     const characters = parsed.characters;
+    const characterNames = []; 
+    let completedRequests = 0;
+
     for (let i = 0; i < characters.length; i++) {
         request(characters[i], function (error, response, body) {
             if (error) {
                 console.error(error);
+                return; 
             }
-            const parsed = JSON.parse(body);
-            console.log(parsed.name);
+            const parsedCharacter = JSON.parse(body);
+            characterNames.push(parsedCharacter.name); 
+            completedRequests++;
+            if (completedRequests === characters.length) {
+                for (let j = 0; j < characterNames.length; j++) {
+                    console.log(characterNames[j]);
+                }
+            }
         });
     }
 });
