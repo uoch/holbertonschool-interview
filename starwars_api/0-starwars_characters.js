@@ -27,7 +27,7 @@ request('https://swapi-api.hbtn.io/api/films/' + id, function (error, response, 
             characterNames.push(parsedCharacter.name); 
             completedRequests++;
             if (completedRequests === characters.length) {
-                for (let j = 0; j < characterNames.length; j++) {
+                for (let j = 0; j < characterNames.length -1 ; j++) {
                     console.log(characterNames[j]);
                 }
             }
