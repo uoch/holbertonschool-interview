@@ -1,24 +1,15 @@
 #!/usr/bin/python3
 """rain """
 
-def comapre(wall, wall2):
-    """compare"""
-    return min(wall, wall2) * abs(wall - wall2)
+
+def trapped_water(walls, i):
+    """trapped_water is a to de"""
+    left_max = max(walls[:i])
+    right_max = max(walls[i + 1:])
+    return max(0, min(left_max, right_max) - walls[i])
+
 
 def rain(walls):
-    total_rain = 0
-    count = 0
-
-    for wall in walls:
-        if wall > 0:
-            for wall2 in walls:
-                if wall2 == 0:
-                    count += 1
-                else:
-                    total_rain += comapre(wall, wall2) * count
-                    count = 0
-                    break
-
-    return total_rain
-        
-
+    """determines how much water will be retained after it rains"""
+    r = sum(map(lambda i: trapped_water(walls, i), range(1, len(walls) - 1)))
+    return r
