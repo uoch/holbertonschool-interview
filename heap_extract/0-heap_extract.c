@@ -7,8 +7,10 @@ int heap_extract(heap_t **root)
 
     if (!root || !*root)
         return (0);
+
     node = *root;
     value = node->n;
+
     while (node->left || node->right)
     {
         if (!node->right || node->left->n > node->right->n)
@@ -22,10 +24,16 @@ int heap_extract(heap_t **root)
             node = node->right;
         }
     }
-    if (node->parent->left == node)
-        node->parent->left = NULL;
-    else
-        node->parent->right = NULL;
-    free(node);
+
+    if (node->parent)
+    {
+        if (node->parent->left == node)
+            node->parent->left = NULL;
+        else
+            node->parent->right = NULL;
+    }
+
+    free(*root);
+
     return (value);
 }
