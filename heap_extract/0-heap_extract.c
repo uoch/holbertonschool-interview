@@ -1,16 +1,14 @@
 #include "binary_trees.h"
 
-int heap_extract(heap_t **root)
-{
+
+int heap_extract(heap_t **root){
     heap_t *node = NULL;
     int value = 0;
 
     if (!root || !*root)
         return (0);
-
     node = *root;
     value = node->n;
-
     while (node->left || node->right)
     {
         if (!node->right || node->left->n > node->right->n)
@@ -24,16 +22,10 @@ int heap_extract(heap_t **root)
             node = node->right;
         }
     }
-
-    if (node->parent)
-    {
-        if (node->parent->left == node)
-            node->parent->left = NULL;
-        else
-            node->parent->right = NULL;
-    }
-
-    free(*root);
-
+    if (node->parent->left == node)
+        node->parent->left = NULL;
+    else
+        node->parent->right = NULL;
+    free(node);
     return (value);
 }
