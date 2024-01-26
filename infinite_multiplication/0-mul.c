@@ -60,27 +60,30 @@ int *is_digit_str(char *str)
  *
  * Return: an array of integers representing the result of multiplication
  */
-int *arr_mul(int *arr1, int *arr2, int len1, int len2)
+int *arr_mul(int *arr1, int *arr2)
 {
-	int i, j, k, len;
-	int *result;
+	int len1, len2, i, j, *result;
 
-	len = len1 + len2;
-	result = malloc(sizeof(int) * len);
+	len1 = len2 = i = j = 0;
+	while (arr1[len1])
+		len1++;
+	while (arr2[len2])
+		len2++;
+
+	result = malloc(sizeof(int) * (len1 + len2));
 	if (result == NULL)
 		return NULL;
 
-	for (i = 0; i < len; i++)
+	for (i = 0; i < len1 + len2; i++)
 		result[i] = 0;
 
 	for (i = len1 - 1; i >= 0; i--)
 	{
 		for (j = len2 - 1; j >= 0; j--)
 		{
-			k = len1 + len2 - 2 - i - j;
-			result[k] += arr1[i] * arr2[j];
-			result[k + 1] += result[k] / 10;
-			result[k] %= 10;
+			result[i + j + 1] += arr1[i] * arr2[j];
+			result[i + j] += result[i + j + 1] / 10;
+			result[i + j + 1] %= 10;
 		}
 	}
 
@@ -128,7 +131,7 @@ int main(int argc, char *argv[])
 	if (num1 == NULL || num2 == NULL)
 		exit_error();
 
-	int *result = arr_mul(num1, num2, len1, len2);
+	int *result = arr_mul(num1, num2);
 
 	if (result == NULL)
 		exit_error();
