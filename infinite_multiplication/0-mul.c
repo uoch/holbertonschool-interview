@@ -24,6 +24,7 @@ void print_number(long long n)
 /**
  * is_digit_str - checks if a string contains only digits
  * @str: input string
+ *
  * Return: 1 if all characters are digits, 0 otherwise
  */
 int is_digit_str(char *str)
@@ -52,40 +53,67 @@ void exit_error(void)
 	exit(98);
 }
 
-long long mul(long long a, long long b)
+/**
+ * school_mul - performs multiplication of two large numbers
+ * @arr1: array representing the first number
+ * @arr2: array representing the second number
+ * @len1: length of the first array
+ * @len2: length of the second array
+ *
+ * Return: 0 on success
+ */
+int school_mul(char *arr1, char *arr2, int len1, int len2)
 {
-	return (a * b);
-}
+	int i, j, k = 0, carry = 0, sum = 0;
+	int *result = malloc(sizeof(int) * (len1 + len2));
 
-int main(int argc, char *argv[])
-{
-	long long a, b, product;
+	for (i = 0; i < len1 + len2; i++)
+		result[i] = 0;
 
-	if (argc != 3 || !is_digit_str(argv[1]) || !is_digit_str(argv[2]))
+	for (i = len1 - 1; i >= 0; i--)
 	{
-		exit_error();
+		carry = 0;
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			sum = (arr1[i] - '0') * (arr2[j] - '0') + result[i + j + 1] + carry;
+			carry = sum / 10;
+			result[i + j + 1] = sum % 10;
+		}
+		result[i + j + 1] = carry;
 	}
 
-	a = atoll(argv[1]);
-	b = atoll(argv[2]);
-	product = mul(a, b);
+	while (result[k] == 0)
+		k++;
 
-	if (product < 0)
-	{
-		_putchar('-');
-		product = -product;
-	}
-
-	if (product == 0)
-	{
-		_putchar('0');
-	}
-	else
-	{
-		print_number(product);
-	}
+	for (i = k; i < len1 + len2; i++)
+		_putchar(result[i] + '0');
 
 	_putchar('\n');
+	free(result);
+	return (0);
+}
 
-	return 0;
+/**
+ * main - entry point of the program
+ * @argc: number of command-line arguments
+ * @argv: array of command-line argument strings
+ *
+ * Return: 0 on success
+ */
+int main(int argc, char *argv[])
+{
+	if (argc != 3 || !is_digit_str(argv[1]) || !is_digit_str(argv[2]))
+		exit_error();
+
+	int len1 = 0, len2 = 0;
+
+	while (argv[1][len1])
+		len1++;
+
+	while (argv[2][len2])
+		len2++;
+
+	school_mul(argv[1], argv[2], len1, len2);
+
+	return (0);
 }
