@@ -7,7 +7,7 @@ int _putchar(char c);
  * print_number - prints a long long integer
  * @n: long long integer to be printed
  */
-void print_number(long long n)
+void print_number(int n)
 {
 	if (n < 0)
 	{
@@ -36,7 +36,7 @@ int is_digit_str(char *str)
 		str++;
 	}
 
-	return 1;
+	return (1);
 }
 
 /**
@@ -124,7 +124,6 @@ int main(int argc, char *argv[])
 
 	arr_mul(num1, num2, len1, len2, result);
 
-	// Print the result in the correct order
 	i = 0;
 	while (i < len1 + len2 && result[i] == 0)
 		i++;
@@ -141,5 +140,5 @@ int main(int argc, char *argv[])
 	free(num2);
 	free(result);
 
-	return 0;
+	return (0);
 }
