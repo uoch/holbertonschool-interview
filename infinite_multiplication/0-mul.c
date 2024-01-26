@@ -9,16 +9,16 @@ int _putchar(char c);
  */
 void print_number(long long n)
 {
-    if (n < 0)
-    {
-        _putchar('-');
-        n = -n;
-    }
+	if (n < 0)
+	{
+		_putchar('-');
+		n = -n;
+	}
 
-    if (n / 10 != 0)
-        print_number(n / 10);
+	if (n / 10 != 0)
+		print_number(n / 10);
 
-    _putchar(n % 10 + '0');
+	_putchar(n % 10 + '0');
 }
 
 /**
@@ -29,14 +29,14 @@ void print_number(long long n)
  */
 int is_digit_str(char *str)
 {
-    while (*str)
-    {
-        if (*str < '0' || *str > '9')
-            return 0;
-        str++;
-    }
+	while (*str)
+	{
+		if (*str < '0' || *str > '9')
+			return 0;
+		str++;
+	}
 
-    return 1;
+	return 1;
 }
 
 /**
@@ -49,20 +49,20 @@ int is_digit_str(char *str)
  */
 void arr_mul(int *arr1, int *arr2, int len1, int len2, int *result)
 {
-    int i, j;
+	int i, j;
 
-    for (i = 0; i < len1 + len2; i++)
-        result[i] = 0;
+	for (i = 0; i < len1 + len2; i++)
+		result[i] = 0;
 
-    for (i = len1 - 1; i >= 0; i--)
-    {
-        for (j = len2 - 1; j >= 0; j--)
-        {
-            result[i + j + 1] += arr1[i] * arr2[j];
-            result[i + j] += result[i + j + 1] / 10;
-            result[i + j + 1] %= 10;
-        }
-    }
+	for (i = len1 - 1; i >= 0; i--)
+	{
+		for (j = len2 - 1; j >= 0; j--)
+		{
+			result[i + j + 1] += arr1[i] * arr2[j];
+			result[i + j] += result[i + j + 1] / 10;
+			result[i + j + 1] %= 10;
+		}
+	}
 }
 
 /**
@@ -70,14 +70,16 @@ void arr_mul(int *arr1, int *arr2, int len1, int len2, int *result)
  */
 void exit_error(void)
 {
-    char error[] = "Error\n";
-    int i = 0;
-    while (error[i])
-    {
-        _putchar(error[i]);
-        i++;
-    }
-    exit(98);
+	char error[] = "Error\n";
+	int i = 0;
+
+	while (error[i])
+	{
+		_putchar(error[i]);
+		i++;
+	}
+
+	exit(98);
 }
 
 /**
@@ -89,43 +91,55 @@ void exit_error(void)
  */
 int main(int argc, char *argv[])
 {
-    if (argc != 3 || !is_digit_str(argv[1]) || !is_digit_str(argv[2]))
-        exit_error();
+	int len1, len2, i;
+	int *num1, *num2, *result;
 
-    int len1 = 0, len2 = 0;
+	if (argc != 3 || !is_digit_str(argv[1]) || !is_digit_str(argv[2]))
+		exit_error();
 
-    while (argv[1][len1])
-        len1++;
+	len1 = 0;
+	len2 = 0;
 
-    while (argv[2][len2])
-        len2++;
+	while (argv[1][len1])
+		len1++;
 
-    int *num1 = is_digit_str(argv[1]) ? malloc(sizeof(int) * len1) : NULL;
-    int *num2 = is_digit_str(argv[2]) ? malloc(sizeof(int) * len2) : NULL;
+	while (argv[2][len2])
+		len2++;
 
-    if (num1 == NULL || num2 == NULL)
-        exit_error();
+	num1 = is_digit_str(argv[1]) ? malloc(sizeof(int) * len1) : NULL;
+	num2 = is_digit_str(argv[2]) ? malloc(sizeof(int) * len2) : NULL;
 
-    for (int i = 0; i < len1; i++)
-        num1[i] = argv[1][i] - '0';
+	if (num1 == NULL || num2 == NULL)
+		exit_error();
 
-    for (int i = 0; i < len2; i++)
-        num2[i] = argv[2][i] - '0';
+	for (i = 0; i < len1; i++)
+		num1[i] = argv[1][i] - '0';
 
-    int *result = malloc(sizeof(int) * (len1 + len2));
-    if (result == NULL)
-        exit_error();
+	for (i = 0; i < len2; i++)
+		num2[i] = argv[2][i] - '0';
 
-    arr_mul(num1, num2, len1, len2, result);
+	result = malloc(sizeof(int) * (len1 + len2));
+	if (result == NULL)
+		exit_error();
 
-    for (int i = 0; i < len1 + len2; i++)
-        _putchar(result[i] + '0');
+	arr_mul(num1, num2, len1, len2, result);
 
-    _putchar('\n');
+	// Print the result in the correct order
+	i = 0;
+	while (i < len1 + len2 && result[i] == 0)
+		i++;
 
-    free(num1);
-    free(num2);
-    free(result);
+	if (i == len1 + len2)
+		_putchar('0');
+	else
+		for (; i < len1 + len2; i++)
+			_putchar(result[i] + '0');
 
-    return 0;
+	_putchar('\n');
+
+	free(num1);
+	free(num2);
+	free(result);
+
+	return 0;
 }
