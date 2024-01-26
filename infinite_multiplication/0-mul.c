@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "mul.h"
+#include"holberton.h"
 
 int str_len(char *str)
 {
