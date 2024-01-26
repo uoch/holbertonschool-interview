@@ -124,7 +124,6 @@ int main(int argc, char *argv[])
 
 	arr_mul(num1, num2, len1, len2, result);
 
-	// Print the result in the correct order
 	i = 0;
 	while (i < len1 + len2 && result[i] == 0)
 		i++;
