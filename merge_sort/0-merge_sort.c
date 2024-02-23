@@ -34,22 +34,21 @@ void merge_sort(int *array, size_t size)
  */
 void rec_merge_sort(int *array, int *temp, size_t start, size_t end)
 {
-    size_t mid;
+	size_t mid;
 
-    if (start >= end)
-        return;
+	if (start >= end)
+		return;
 
-    if ((end - start) % 2)
-        mid = start + (end - start) / 2;
-    else
-        mid = start + (end - start) / 2 - 1;
+	if ((end - start) % 2)
+		mid = start + (end - start) / 2;
+	else
+		mid = start + (end - start) / 2 - 1;
 
-    rec_merge_sort(array, temp, start, mid);
-    rec_merge_sort(array, temp, mid + 1, end);
-    if (array[mid] > array[mid + 1])
-        merge(array, temp, start, mid, end);
+	rec_merge_sort(array, temp, start, mid);
+	rec_merge_sort(array, temp, mid + 1, end);
+	if (array[mid] > array[mid + 1])
+		merge(array, temp, start, mid, end);
 }
-
 
 /**
  * merge - Merges two subarrays of an array
@@ -61,35 +60,35 @@ void rec_merge_sort(int *array, int *temp, size_t start, size_t end)
  */
 void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
 {
-    size_t i = start, j = mid + 1, k = start;
+	size_t i = start, j = mid + 1, k = start;
 
-    if (array[mid] <= array[mid + 1]) // Check if the last element of the left array is less than or equal to the first element of the right array
-        return;
+	if (array[mid] <= array[mid + 1])
+		return;
 
-    printf("Merging...\n");
+	printf("Merging...\n");
 
-    printf("[left]: ");
-    print_array(array + start, mid - start + 1);
-    printf("[right]: ");
-    print_array(array + mid + 1, end - mid);
+	printf("[left]: ");
+	print_array(array + start, mid - start + 1);
+	printf("[right]: ");
+	print_array(array + mid + 1, end - mid);
 
-    while (i <= mid && j <= end)
-    {
-        if (array[i] <= array[j])
-            temp[k++] = array[i++];
-        else
-            temp[k++] = array[j++];
-    }
+	while (i <= mid && j <= end)
+	{
+		if (array[i] <= array[j])
+			temp[k++] = array[i++];
+		else
+			temp[k++] = array[j++];
+	}
 
-    while (i <= mid)
-        temp[k++] = array[i++];
+	while (i <= mid)
+		temp[k++] = array[i++];
 
-    while (j <= end)
-        temp[k++] = array[j++];
+	while (j <= end)
+		temp[k++] = array[j++];
 
-    for (i = start; i <= end; i++)
-        array[i] = temp[i];
+	for (i = start; i <= end; i++)
+		array[i] = temp[i];
 
-    printf("[Done]: ");
-    print_array(array + start, end - start + 1);
+	printf("[Done]: ");
+	print_array(array + start, end - start + 1);
 }
