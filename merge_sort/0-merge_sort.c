@@ -43,7 +43,6 @@ void rec_merge_sort(int *array, int *temp, size_t start, size_t end)
 	rec_merge_sort(array, temp, start, mid);
 	rec_merge_sort(array, temp, mid + 1, end);
 
-	// Merge left and right subarrays
 	merge(array, temp, start, mid, end);
 }
 /**
@@ -63,13 +62,11 @@ void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
 
 	printf("Merging...\n");
 
-	// Printing the left and right subarrays
 	printf("[left]: ");
 	print_array(array + start, mid - start + 1);
 	printf("[right]: ");
 	print_array(array + mid + 1, end - mid);
 
-	// Merging the two subarrays
 	while (i <= mid && j <= end)
 	{
 		if (array[i] <= array[j])
