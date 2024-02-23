@@ -21,10 +21,11 @@ void merge_sort(int *array, size_t size)
 
 void rec_merge_sort(int *array, int *temp, size_t start, size_t end)
 {
+    size_t mid;
     if (start >= end)
         return;
 
-    size_t mid = start + (end - start) / 2;
+    mid = start + ((end - start) / 2);
     rec_merge_sort(array, temp, start, mid);
     rec_merge_sort(array, temp, mid + 1, end);
     merge(array, temp, start, mid, end);
@@ -40,7 +41,8 @@ void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
     printf("[right]: ");
     print_array(array + mid + 1, end - mid);
 
-    while (i <= mid && j <= end) {
+    while (i <= mid && j <= end)
+    {
         if (array[i] <= array[j])
             temp[k++] = array[i++];
         else
@@ -49,14 +51,13 @@ void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
 
     while (i <= mid)
         temp[k++] = array[i++];
-    
+
     while (j <= end)
         temp[k++] = array[j++];
-    
+
     for (i = start; i <= end; i++)
         array[i] = temp[i];
 
     printf("[Done]: ");
     print_array(array + start, end - start + 1);
 }
-
