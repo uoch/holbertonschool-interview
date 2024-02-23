@@ -63,6 +63,7 @@ void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
 	size_t left_index = start;
 	size_t right_index = mid + 1;
 	size_t temp_index = start;
+	size_t i;
 
 	printf("Merging...\n");
 	printf("[left]: ");
@@ -92,7 +93,7 @@ void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
 		temp[temp_index++] = array[right_index++];
 	}
 
-	for (size_t i = start; i <= end; i++)
+	for (i = start; i <= end; i++)
 	{
 		array[i] = temp[i];
 	}
