@@ -60,34 +60,42 @@ void rec_merge_sort(int *array, int *temp, size_t start, size_t end)
  */
 void merge(int *array, int *temp, size_t start, size_t mid, size_t end)
 {
-	size_t i = start, j = mid + 1, k = start;
-
-	if (array[mid] <= array[mid + 1])
-		return;
+	size_t left_index = start;
+	size_t right_index = mid + 1;
+	size_t temp_index = start;
 
 	printf("Merging...\n");
-
 	printf("[left]: ");
 	print_array(array + start, mid - start + 1);
 	printf("[right]: ");
 	print_array(array + mid + 1, end - mid);
 
-	while (i <= mid && j <= end)
+	while (left_index <= mid && right_index <= end)
 	{
-		if (array[i] <= array[j])
-			temp[k++] = array[i++];
+		if (array[left_index] <= array[right_index])
+		{
+			temp[temp_index++] = array[left_index++];
+		}
 		else
-			temp[k++] = array[j++];
+		{
+			temp[temp_index++] = array[right_index++];
+		}
 	}
 
-	while (i <= mid)
-		temp[k++] = array[i++];
+	while (left_index <= mid)
+	{
+		temp[temp_index++] = array[left_index++];
+	}
 
-	while (j <= end)
-		temp[k++] = array[j++];
+	while (right_index <= end)
+	{
+		temp[temp_index++] = array[right_index++];
+	}
 
-	for (i = start; i <= end; i++)
+	for (size_t i = start; i <= end; i++)
+	{
 		array[i] = temp[i];
+	}
 
 	printf("[Done]: ");
 	print_array(array + start, end - start + 1);
