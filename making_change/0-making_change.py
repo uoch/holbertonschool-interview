@@ -3,10 +3,10 @@
 
 
 def makeChange(coins, total):
-    """first sort the coins in descending order, then iterate through the coins"""
+    """first sort the coins in desc order, then iterate through the coins"""
     for i in range(len(coins)):
         if coins[i] > total:
-            coins.pop(i)
+            return -1
     coins.sort(reverse=True)
     count = 0
     for i in range(len(coins)):
