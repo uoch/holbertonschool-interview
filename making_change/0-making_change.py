@@ -4,15 +4,16 @@
 
 def makeChange(coins, total):
     """first sort the coins in desc order, then iterate through the coins"""
-    if total < 0 or not coins:
-        return -1
-
-    coins.sort(reverse=True)  # Sort coins in descending order
-
+    if total <= 0:
+        return 0
+    for i in range(len(coins)):
+        if coins[i] > total:
+            return -1
+    coins.sort(reverse=True)
     count = 0
-    for coin in coins:
-        while total >= coin:
-            total -= coin
-            count += 1
-
-    return count if total == 0 else -1
+    for i in range(len(coins)):
+        count += total // coins[i]
+        total = total % coins[i]
+    if total != 0:
+        return -1
+    return count
