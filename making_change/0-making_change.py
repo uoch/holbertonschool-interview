@@ -1,8 +1,9 @@
 #!/usr/bin/python3
-
+"""find the minimum numb of coins required to make change for a given total"""
 
 
 def makeChange(coins, total):
+    """first sort the coins in descending order, then iterate through the coins"""
     for i in range(len(coins)):
         if coins[i] > total:
             coins.pop(i)
