@@ -4,6 +4,8 @@
 
 def makeChange(coins, total):
     """first sort the coins in desc order, then iterate through the coins"""
+    if total <= 0:
+        return 0
     for i in range(len(coins)):
         if coins[i] > total:
             return -1
