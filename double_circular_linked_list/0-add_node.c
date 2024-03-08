@@ -51,6 +51,7 @@ List *add_node_end(List **list, char *str)
 List *add_node_begin(List **list, char *str)
 {
 	List *new_node;
+
 	if (list == NULL || str == NULL)
 		return (NULL);
 
