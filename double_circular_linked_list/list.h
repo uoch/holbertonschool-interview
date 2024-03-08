@@ -2,6 +2,7 @@
 #define _LIST_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * struct List - doubly linked list
