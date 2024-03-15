@@ -9,17 +9,19 @@
  * @size: The number of elements in the array.
  * Return: The maximum value found in the array.
  */
+
 int getMax(int *array, size_t size)
 {
+	size_t i;
 	int max;
 
 	max = array[0];
-	for (size_t i = 1; i < size; i++)
+	for (i = 1; i < size; i++)
 	{
 		if (array[i] > max)
 			max = array[i];
 	}
-	return (max);
+	return max;
 }
 
 /**
@@ -31,7 +33,9 @@ int getMax(int *array, size_t size)
  */
 void countingSort(int *array, size_t size, int exp)
 {
+	size_t i;
 	int *output;
+	int count[10] = {0};
 
 	output = (int *)malloc(size * sizeof(int));
 	if (output == NULL)
@@ -39,24 +43,23 @@ void countingSort(int *array, size_t size, int exp)
 		printf("Memory allocation failed!\n");
 		exit(EXIT_FAILURE);
 	}
-	int count[10] = {0};
 
-	for (size_t i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 		count[(array[i] / exp) % 10]++;
 
-	for (int i = 1; i < 10; i++)
+	for (i = 1; i < 10; i++)
 		count[i] += count[i - 1];
 
-	for (int i = size - 1; i >= 0; i--)
+	for (i = size - 1; i >= 0; i--)
 	{
 		output[count[(array[i] / exp) % 10] - 1] = array[i];
 		count[(array[i] / exp) % 10]--;
 	}
 
-	for (size_t i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 		array[i] = output[i];
 
-	for (size_t i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 		printf("%d ", array[i]);
 	printf("\n");
 
@@ -72,7 +75,8 @@ void countingSort(int *array, size_t size, int exp)
 void radix_sort(int *array, size_t size)
 {
 	int max = getMax(array, size);
+	int exp;
 
-	for (int exp = 1; max / exp > 0; exp *= 10)
+	for (exp = 1; max / exp > 0; exp *= 10)
 		countingSort(array, size, exp);
 }
