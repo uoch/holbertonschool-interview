@@ -50,7 +50,7 @@ void countingSort(int *array, size_t size, int exp)
 	for (i = 1; i < 10; i++)
 		count[i] += count[i - 1];
 
-	for (i = size - 1; i >= 0; i--)
+	for (i = size - 1; i > 0; i--)
 	{
 		output[count[(array[i] / exp) % 10] - 1] = array[i];
 		count[(array[i] / exp) % 10]--;
