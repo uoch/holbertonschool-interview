@@ -1,7 +1,7 @@
 #ifndef AVL
 #define AVL
 #define MIN (-2147483647 - 1)
-#define MAX	2147483647
+#define MAX 2147483647
 /**
  * struct binary_tree_s - Binary tree node
  *
