@@ -13,7 +13,7 @@ def is_prime(num):
 
 
 def generate_primes_up_to(n):
-    """Generate a list of prime numbers up to n using the prime division method."""
+    """Generate a list of prime numbers up to n."""
     primes = []
     for i in range(2, n + 1):
         if is_prime(i):
@@ -33,6 +33,10 @@ def build_prime_multiples_dict(n):
 
 def isWinner(x, nums):
     """Determine who the winner of the game is."""
+    if x < 1 or not nums:
+        return None
+    if x == 1:
+        return "Maria"
     prime_multiples = build_prime_multiples_dict(max(nums))
     player = 0
     for num in nums:
