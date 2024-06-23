@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""prime_game module"""
 
 
 def is_prime(num):
@@ -21,7 +22,7 @@ def generate_primes_up_to(n):
 
 
 def build_prime_multiples_dict(n):
-    """Build a dictionary where keys are prime numbers and values are lists of their multiples up to n."""
+    """create data multiples"""
     primes = generate_primes_up_to(n)
     prime_multiples = {}
     for prime in primes:
